@@ -33,77 +33,47 @@ client.on('message' , message => {
   }
 });
 
-client.on("message", message => {
-    if (message.content === "#help") {
-            if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply(`you not admin <:  `);
-          message.react("✅")
-              message.react("📬")
-        const sicon = message.author.avatarURL
-     const embed = new Discord.RichEmbed() 
-         .setColor("RANDOM")
-         .setThumbnail(sicon)
-         .setTitle(`    ══════════ஜ۩۞۩ஜ════════════    `)
-         .setDescription(`
-      __***👑「اوامر ادارية」👑***__
-       
-      **👑#muteall**, 「لقفل الشات」
-    
-      **👑#unmuteall**, 「لفتح الشات」
-    
-      **👑#mute**, 「 لاعطاء ميوت لشخص 」
-    
-      **👑#mutevoice**, 「 لاعطاء ميوت صوتي 」
-    
-      **👑#unmutevoice**, 「لفك ميوت صوتي 」
-    
-      **👑#deafen**, 「لأعطاء ديفن」
-    
-      **👑#undeafen**, 「لفك الديفن」
-    
-      **👑#unmute**, 「 لفك الميوت」
-    
-      **👑#ban**,    「لتعطي شخص باند مع السبب」
 
-      **👑#unban**, 「لفك الباند عند شخص محدد」
-      
-      **👑#kick**, 「لتعطي شخص كيك مع السبب」
-       
-      **👑#clear**, 「لمسح الشات」
-       
-      **👑#v**,  「لانشاء روم صوتي مؤقت」
-    
-      **👑#cc**,  「لانشاء كاتجوري 」
-    
-      **👑#cv**,  「لانشاء روم صوتي دائم 」
 
-      **👑#ct**,  「لانشاء روم كتابي دائم 」
-    
-      **👑#delet**,   「يحذف الـروم سواء صوتي او كتابي」
-    
-      **👑#role**,  「لأعطاء رتبة」
-    
-      **👑#roleremove**,  「 أزالة رتبة」
-    
-      **👑#role all**,  「لأعطاء جميع الي في سيرفر رتبة」
-    
-      **👑#role bots**,  「لأعطاء جميع البوتات رتبة」
-    
-      **👑#role humans**,   「لأعطاء جميع الناس معدى البوتات رتبة 」
-    
-      **👑#voicekick**,  「لطرد شخص من روم صوتي」
-    
-      **👑#move**,  「لسحب الشخص الى الروم صوتي الخاص بك」
+var prefix = "#"
+client.on('message', message => {
+  if (message.author.x5bz) return;
+  if (!message.content.startsWith(prefix)) return;
 
-      **👑#move all**, 「لسحب جميع الاشخاص الموجودون بالرومات الصوتية أليك」
-    `)
-    .addField('   ══════════ஜ۩۞۩ஜ════════════   ')
-       
-       
-      message.author.sendEmbed(embed)
-       
-      }
-      }); 
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
 
+  let args = message.content.split(" ").slice(1);
+
+  if (command == "kick") {
+               if(!message.channel.guild) return message.reply('** This command only for servers**');
+         
+  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("**You Don't Have ` KICK_MEMBERS ` Permission**");
+  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("**I Don't Have ` KICK_MEMBERS ` Permission**");
+  let user = message.mentions.users.first();
+  let reason = message.content.split(" ").slice(2).join(" ");
+  /*let b5bzlog = client.channels.find("name", "5bz-log");
+
+  if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
+  if (message.mentions.users.size < 1) return message.reply("**منشن شخص**");
+  if(!reason) return message.reply ("**اكتب سبب الطرد**");
+  if (!message.guild.member(user)
+  .bannable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالي**");
+
+  message.guild.member(user).ban(7, user);
+
+  const banembed = new Discord.RichEmbed()
+  .setAuthor(`BANNED!`, user.displayAvatarURL)
+  .setColor("RANDOM")
+  .setTimestamp()
+  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
+  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
+  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+  message.channel.send({
+    embed : banembed
+  })
+}
+});
 
 var prefix = "#"
 client.on('message', message => {
