@@ -97,7 +97,7 @@ client.on("message", najzx => {
     .addField('   ══════════ஜ۩۞۩ஜ════════════   ')
        
        
-      message.author.sendEmbed(embed)
+      najzx.author.sendEmbed(embed)
        
       }
       }); 
