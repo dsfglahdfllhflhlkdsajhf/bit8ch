@@ -111,105 +111,59 @@ client.on("message", message => {
    }); 
 
 
-   client.on('message', message => {
-    if (message.content == ("#ban")) {
-               
+client.on('message', message => {
+    let messageArray = message.content.split(" ");
+    let cmd = messageArray[0];
+    let args = messageArray.slice(0);
+    let prefix = '#';
+    let bicon = message.guild.displayAvatarURL;
 
-        const mmss = require('ms');
-        let reason = message.content.split(' ').slice(3).join(' ');
-        let time = message.content.split(' ')[2];
-        let guild = message.guild;
+if(cmd === `${prefix}emojis`) {
 
-        let usermention = message.mentions.users.first();
-
-        if (!message.guild.member(message.author).hasPermission('BAN_MEMBERS')) {
-            return message.reply(':lock: **You** need `BAN_MEMBERS` Permissions to execute `ban`')
-        }
-
-        if (!message.guild.member(client.user).hasPermission('BAN_MEMBERS')) {
-            return message.reply(':lock: **I** need `BAN_MEMBERS` Permissions to execute `ban`')
-        }
-
+    let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if (!bUser) return message.channel.send("Idk who 2 ban ??");
+    let bReason = args.join(" ").slice(22);
+    if (!bReason) return message.channel.send('Type A reason')
+    if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("`You don't have enough permissions to use this command.`");
     
+    let banEmbed = new Discord.RichEmbed()
+    .setDescription("**~~User just banned :~~**")
+    .setColor("#00ff93")
+    .addField("- Banned User :", `${bUser} (${bUser.id})`)
+    .addField("- Banned By :", `<@${message.author.id}> (${message.author.id})`);
 
-        if (message.mentions.users.size < 1) {
-            return message.reply('You need to mention someone to Ban them!')
-        }
+    message.guild.member(bUser).ban(bReason);
+    message.channel.send(banEmbed);
 
-        if (message.author.id === usermention.id) {
-            return message.reply('You cant punish yourself :wink:')
-        }
-
-        if (!time) {
-            return message.reply(`How much time ? **Usage:**\`-ban [@mention] [1d] [Reason]\``)
-        }
-
-        if (!time.match(/[1-7][s,m,h,d,w]/g)) {
-            return message.reply('I need a valid time ! look at the Usage! right here: **Usage:**`-ban [@mention] [1m] [Reason]`')
-        }
-
-        if (!reason) {
-            return message.reply(`You must give me a reason for the ban **Usage:**\`-ban [@mention] [1d] [Reason]\``)
-        }
-
-        if (!message.guild.member(usermention).bannable) {
-            return message.reply('This member is above me in the `role chain` Can\'t ban them')
-        }
-
-        message.reply("This user has been banned form the server.");
-
-        usermention.send(`You've just got banned from ${guild.name}  \n State reason: **${reason}** \n **Disclamer**: If the ban is not timed and Permanent you may not appeal the **BAN**!`)
-        message.guild.ban(usermention, 7);
-        setTimeout(() => {
-            message.guild.unban(usermention.id);
-        }, mmss(time));
-       message.channel.send({embed: {
-            color: 3447003,
-            author: {
-              name: client.user.username,
-              icon_url: client.user.avatarURL
-            },
-            fields: [{
-                name: "Ban:",
-                value: `**Banned:** ${usermention.username}#${usermention.discriminator}\n**Moderator:** ${message.author.username} \n**Duration:** ${mmss(mmss(time), {long: true})} \n**Reason:** ${reason}`
-              }
-            ],
-            timestamp: new Date(),
-            footer: {
-              icon_url: client.user.avatarURL,
-              text: "Dragon"
-            }
-          }
-        });
-    }
+    return;
+}
 });
 
 client.on('message', message => {
-  var prefix = "#";
-  if (message.author.omar) return;
-  if (!message.content.startsWith(prefix)) return;
-  var command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-  var args = message.content.split(" ").slice(1);
-  if (command == "kick") {
-   if(!message.channel.guild) return message.reply('** This command only for servers :x:**');
-  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("**You Don't Have ` KICK_MEMBERS ` Permission**");
-  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("**I Don't Have ` KICK_MEMBERS ` Permission**");
-  var user = message.mentions.users.first();
-  var reason = message.content.split(" ").slice(2).join(" ");
-  if (message.mentions.users.size < 1) return message.reply("**__Mention__ A Member To Kick !**");
-  if(!reason) return message.reply ("**Write A __Reason__ !**");
-  if (!message.guild.member(user).kickable) return message.reply("**Can't Kick A Higher Role Than Me !**");
-  const kickembed = new Discord.RichEmbed()
-  .setAuthor(`KICKED!`, user.displayAvatarURL)
-  .setColor("RANDOM")
-  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
-  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
-  message.channel.send({embed : kickembed})
-  user.send(reason).then(()=>{
-message.guild.member(user).kick();
-  })
+    let messageArray = message.content.split(" ");
+    let cmd = messageArray[0];
+    let args = messageArray.slice(0);
+    let prefix = '#';
+    let bicon = message.guild.displayAvatarURL;
+
+if(cmd === `${prefix}emojis`) {
+
+    let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if (!bUser) return message.channel.send("Idk who 2 ban ??");
+    let bReason = args.join(" ").slice(22);
+    if (!bReason) return message.channel.send('Type A reason')
+    if(!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send("`You don't have enough permissions to use this command.`");
+    
+    let banEmbed = new Discord.RichEmbed()
+    .setDescription("**~~User just banned :~~**")
+    .setColor("#00ff93")
+    .addField("- kicked User :", `${bUser} (${bUser.id})`)
+    .addField("- kicked By :", `<@${message.author.id}> (${message.author.id})`);
+
+    message.guild.member(bUser).ban(bReason);
+    message.channel.send(banEmbed);
+
+    return;
 }
 });
 
