@@ -33,14 +33,14 @@ client.on('message' , message => {
   }
 });
 
-client.on("message", najzx => {
-    if (najzx.content === "#help") {
-            if(!najzx.guild.member(najzx.author).hasPermission("MANAGE_MESSAGES")) return najzx.reply(`you not admin <:  `);
-           najzx.react("✅")
-              najzx.react("📬")
-        const sicon = najzx.author.avatarURL
+client.on("message", message => {
+    if (message.content === "#help") {
+            if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply(`you not admin <:  `);
+          message.react("✅")
+              message.react("📬")
+        const sicon = message.author.avatarURL
      const embed = new Discord.RichEmbed() 
-         .setColor("#ffff00")
+         .setColor("RANDOM")
          .setThumbnail(sicon)
          .setTitle(`    ══════════ஜ۩۞۩ஜ════════════    `)
          .setDescription(`
@@ -99,7 +99,7 @@ client.on("message", najzx => {
     .addField('   ══════════ஜ۩۞۩ஜ════════════   ')
        
        
-      najzx.author.sendEmbed(embed)
+      message.author.sendEmbed(embed)
        
       }
       }); 
