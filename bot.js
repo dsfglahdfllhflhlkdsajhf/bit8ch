@@ -116,7 +116,6 @@ client.on('message', message => {
     let cmd = messageArray[0];
     let args = messageArray.slice(0);
     let prefix = '#';
-    let bicon = message.guild.displayAvatarURL;
 
 if(cmd === `${prefix}emojis`) {
 
@@ -144,7 +143,6 @@ client.on('message', message => {
     let cmd = messageArray[0];
     let args = messageArray.slice(0);
     let prefix = '#';
-    let bicon = message.guild.displayAvatarURL;
 
 if(cmd === `${prefix}emojis`) {
 
