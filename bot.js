@@ -39,10 +39,11 @@ client.on("message", najzx => {
             `);
            najzx.react("✅")
               najzx.react("📬")
+        const sicon = najzx.author.avatarURL
      const embed = new Discord.RichEmbed() 
          .setColor("#ffff00")
-         .setThumbnail(najzx.author.displayAvatarURL)
-         .addField(`    ══════════ஜ۩۞۩ஜ════════════    `)
+         .setThumbnail(sicon)
+         .setTitle(`    ══════════ஜ۩۞۩ஜ════════════    `)
          .setDescription(`
       __***👑「اوامر ادارية」👑***__
        
@@ -92,7 +93,9 @@ client.on("message", najzx => {
     
       **👑#voicekick**,  「لطرد شخص من روم صوتي」
     
+      **👑#move**,  「لسحب الشخص الى الروم صوتي الخاص بك」
 
+      **👑#move all**, 「لسحب جميع الاشخاص الموجودون بالرومات الصوتية أليك」
     `)
     .addField('   ══════════ஜ۩۞۩ஜ════════════   ')
        
