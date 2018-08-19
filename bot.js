@@ -35,8 +35,7 @@ client.on('message' , message => {
 
 client.on("message", najzx => {
     if (najzx.content === "#help") {
-            if(!najzx.guild.member(najzx.author).hasPermission("MANAGE_MESSAGES")) return najzx.reply(`
-            `);
+            if(!najzx.guild.member(najzx.author).hasPermission("MANAGE_MESSAGES")) return najzx.reply(`you not admin <:  `);
            najzx.react("✅")
               najzx.react("📬")
         const sicon = najzx.author.avatarURL
