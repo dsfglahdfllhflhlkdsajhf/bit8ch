@@ -34,14 +34,14 @@ client.on('message' , message => {
 });
 
 client.on("message", najzx => {
-    if (message.content === "#help") {
-            if(!message.guild.member(najzx.author).hasPermission("MANAGE_MESSAGES")) return najzx.reply(`
+    if (najzx.content === "#help") {
+            if(!najzx.guild.member(najzx.author).hasPermission("MANAGE_MESSAGES")) return najzx.reply(`
             `);
-           message.react("✅")
-              message.react("📬")
+           najzx.react("✅")
+              najzx.react("📬")
      const embed = new Discord.RichEmbed() 
          .setColor("#ffff00")
-         .setThumbnail(message.author.displayAvatarURL)
+         .setThumbnail(najzx.author.displayAvatarURL)
          .addField(`    ══════════ஜ۩۞۩ஜ════════════    `)
          .setDescription(`
       __***👑「اوامر ادارية」👑***__
