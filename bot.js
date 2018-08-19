@@ -109,25 +109,25 @@ client.on('message', message => {
     let args = messageArray.slice(0);
     let prefix = '#';
 
-if(cmd === `${prefix}emojis`) {
-
-    let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if (!bUser) return message.channel.send("Idk who 2 ban ??");
-    let bReason = args.join(" ").slice(22);
-    if (!bReason) return message.channel.send('Type A reason')
-    if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("`You don't have enough permissions to use this command.`");
+if(cmd === `${prefix}ban`) {
+    // Most of this command is identical to kick, except that here we'll only let admins do it.
+    // In the real world mods could ban too, but this is just an example, right? ;)
+    if(!message.member.roles.some(r=>["Administrator"].includes(r.name)) )
+      return message.reply("Sorry, you don't have permissions to use this!");
     
-    let banEmbed = new Discord.RichEmbed()
-    .setDescription("**~~User just banned :~~**")
-    .setColor("#00ff93")
-    .addField("- Banned User :", `${bUser} (${bUser.id})`)
-    .addField("- Banned By :", `<@${message.author.id}> (${message.author.id})`);
+    let member = message.mentions.members.first();
+    if(!member)
+      return message.reply("Please mention a valid member of this server");
+    if(!member.bannable) 
+      return message.reply("I cannot ban this user! Do they have a higher role? Do I have ban permissions?");
 
-    message.guild.member(bUser).ban(bReason);
-    message.channel.send(banEmbed);
-
-    return;
-}
+    let reason = args.slice(1).join(' ');
+    if(!reason) reason = "No reason provided";
+    
+    await member.ban(reason)
+      .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
+    message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
+  }
 });
 
 client.on('message', message => {
@@ -136,25 +136,25 @@ client.on('message', message => {
     let args = messageArray.slice(0);
     let prefix = '#';
 
-if(cmd === `${prefix}emojis`) {
-
-    let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if (!bUser) return message.channel.send("Idk who 2 ban ??");
-    let bReason = args.join(" ").slice(22);
-    if (!bReason) return message.channel.send('Type A reason')
-    if(!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send("`You don't have enough permissions to use this command.`");
+if(cmd === `${prefix}kick`) {
+    // Most of this command is identical to kick, except that here we'll only let admins do it.
+    // In the real world mods could ban too, but this is just an example, right? ;)
+    if(!message.member.roles.some(r=>["Administrator"].includes(r.name)) )
+      return message.reply("Sorry, you don't have permissions to use this!");
     
-    let banEmbed = new Discord.RichEmbed()
-    .setDescription("**~~User just banned :~~**")
-    .setColor("#00ff93")
-    .addField("- kicked User :", `${bUser} (${bUser.id})`)
-    .addField("- kicked By :", `<@${message.author.id}> (${message.author.id})`);
+    let member = message.mentions.members.first();
+    if(!member)
+      return message.reply("Please mention a valid member of this server");
+    if(!member.bannable) 
+      return message.reply("I cannot ban this user! Do they have a higher role? Do I have ban permissions?");
 
-    message.guild.member(bUser).ban(bReason);
-    message.channel.send(banEmbed);
-
-    return;
-}
+    let reason = args.slice(1).join(' ');
+    if(!reason) reason = "No reason provided";
+    
+    await member.ban(reason)
+      .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
+    message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
+  }
 });
 
 
