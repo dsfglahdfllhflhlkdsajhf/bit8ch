@@ -154,7 +154,7 @@ if(cmd === `${prefix}kick`) {
     let reason = args.slice(1).join(' ');
     if(!reason) reason = "No reason provided";
     
-    await member.ban(reason)
+message.member.ban(reason)
       .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
     message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
   }
