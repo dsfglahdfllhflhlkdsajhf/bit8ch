@@ -43,7 +43,7 @@ client.on('message', message => {
         .addField("#ban", "**To ban A mentioned user, (Example: #ban @Ryu...#5498)**")
         .addField("#unban", "**Unban by id, (Example: #unban 426295568688611328)**")
         .addField("#kick", "**Kick A mentioned user, (Example: **#kick @Ryu...#5498)**")
-	.addblankField()
+	.addBlankField()
         .addField("#mute", "**Mute A mentioned user, (Example: #mute @Ryu...#5498)**")
         .addField("#unmute", "**Unmute A mentioned user, (Example: #unmute @Ryu...#5498)**")
         .addField("#muteall", "**Close A current text channel, (Example: #muteall)**")
