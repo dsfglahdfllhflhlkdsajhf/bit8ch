@@ -67,7 +67,7 @@ client.on('message', message => {
         message.delete().catch(O_o=>{});
         message.channel.send("**Check your DMs...**").then(message =>{message.delete(10000)})
         message.author.sendEmbed(adminHelp)
-});
+
 
 var prefix = "#"
 client.on('message', message => {
@@ -680,7 +680,8 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return m
                 channel.delete()
             }
         });
-
+    }
+});
 
  
 
