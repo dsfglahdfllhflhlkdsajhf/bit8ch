@@ -66,9 +66,7 @@ client.on('message', message => {
         .setThumbnail(sicon)
         message.delete().catch(O_o=>{});
         message.channel.send("**Check your DMs...**").then(message =>{message.delete(10000)})
-        message.author.sendEmbed(adminHelp).catch(err => {
-         return message.reply("**Open your DM!**");})
-   }
+        message.author.sendEmbed(adminHelp)
 });
 
 var prefix = "#"
