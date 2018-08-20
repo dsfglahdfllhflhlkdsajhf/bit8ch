@@ -61,7 +61,6 @@ client.on('message', message => {
 		.addField("- cc", "**Creat A category**, **__Example: #cc AlphaAdmins__**")
 		.addField("- role", "**Give A mentioned user role**, **__Example: #role @Ryu...#5498 Admin__**")
 		.addField("- role all", "**Give All server members role**, **__Example: #role all Members__**")
-		.setFooter("For more informations about my commands content with Najzx.")
         .setThumbnail(sicon)
         message.delete().catch(O_o=>{});
         message.channel.send("**Check your DMs...**").then(message =>{message.delete(10000)})
