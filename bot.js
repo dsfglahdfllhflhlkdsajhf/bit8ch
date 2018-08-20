@@ -62,7 +62,6 @@ client.on('message', message => {
 		.addField("#cc :", "**Creat A category, (Example: #cc AlphaAdmins)**")
 		.addField("#role :", "**Give A mentioned user role, (Example: #role @Ryu...#5498 Admin)**")
 		.addField("#role all :", "**Give All server members role, (Example: #role all Members)**")
-		.setFooter(`Requested by, ${message.autor.username}`)
         .setThumbnail(sicon)
         message.delete().catch(O_o=>{});
         message.channel.send("**Check your DMs...**").then(message =>{message.delete(10000)})
