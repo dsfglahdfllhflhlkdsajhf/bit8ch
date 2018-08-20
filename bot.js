@@ -613,7 +613,7 @@ client.on("message", message => {
        var nam = args.join(' ');
      
       if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
-      if(!message.guild.member.hasPermission("MANAGE_CHANNELS")) return message.reply("**يحتاج البوت الى خاصية` MANAGE_CHANNELS ` **").then(msg => msg.delete(6000))
+      if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.reply("**يحتاج البوت الى خاصية` MANAGE_CHANNELS ` **").then(msg => msg.delete(6000))
       if (!nam) return message.channel.send(`<@${message.author.id}> يجب عليك ادخال اسم`);
       message.guild.createChannel(nam, 'category') //  
       message.channel.send(`:white_check_mark:  تم عمل مجموعة : \`${nam}\``);
