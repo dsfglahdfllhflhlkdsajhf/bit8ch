@@ -39,7 +39,7 @@ client.on('message', message => {
         var adminHelp = new Discord.RichEmbed()
         .setTitle("**List of ADMIN Commands..**\n")
 	.setColor("#37303d")
-        .addField("- ban", "**To ban A mentioned user**, **__Example: #ban @Ryu...#5498__**")
+        .addField("- **ban**", "**To ban A mentioned user**, **__Example: #ban @Ryu...#5498__**")
         .addField("- unban", "**Unban by id**, **__Example: #unban 426295568688611328__**")
         .addField("- kick", "**Kick A mentioned user**, **__Example: #kick @Ryu...#5498__**")
         .addField("- mute", "**Mute A mentioned user**, **__Example: #mute @Ryu...#5498__**")
