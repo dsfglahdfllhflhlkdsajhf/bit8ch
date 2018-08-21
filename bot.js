@@ -64,12 +64,10 @@ client.on('message' , message => {
 	let collector4 = message.createReactionCollector(filter4, { time: 120000 });
   
   collector1.on('collect', r => {
-
-  		collector1.stop();
-  		collector2.stop();
-  		collector3.stop();
-  		collector4.stop();
-  		embed.setDescription(`No test nibba ._.`);
+		let embed = new Discord.RichEmbed()
+  		embed.setDescription(`No test nibba ._.`)
+		embed.setFooter("page 2 of 2")
+		
   		message.edit(embed)
   
      });
