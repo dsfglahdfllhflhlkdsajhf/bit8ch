@@ -139,7 +139,7 @@ message.channel.sendEmbed(embed)
       
       if(!role || !toMute.roles.has(role.id)) return message.reply(`This user is already unmuted`)
     
-      await toMute.removeRole(role)
+      toMute.removeRole(role)
       message.reply(`**${user.username}** has been unmuted.`);
     
       return;
