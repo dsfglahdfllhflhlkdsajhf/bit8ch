@@ -19,6 +19,8 @@ client.on('message', message => {
   if (message.channel.type === 'dm') return;
   
   if (!command.startsWith(prefix)) return;
+let user = message.mentions.users.first();
+let reason = message.content.split(" ").slice(2).join(" ");
 
   switch (command.slice(1).toLowerCase()) {
 
@@ -27,8 +29,7 @@ if(!message.channel.guild) return message.reply('** This command only for server
 
 if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("U don't have enough permissions to **Kick members** :lol:");
 if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("I don't have enough permissions to **Kick members**.");
-let user = message.mentions.users.first();
-let reason = message.content.split(" ").slice(2).join(" ");
+
 
 if (message.mentions.users.size < 1) return message.reply("Idk who 2 **kick** xd.");
 if(!reason) return message.reply ("Type a **reason** plz.");
@@ -77,7 +78,6 @@ embed : banembed
     break;
 
 case "unban":
-let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
 if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send("U don't have enough permissions to **Unban members** :lol:");
 if(!user) return  message.channel.send(`Cannot found the id **${message.content.substring(7)}**.`);
 message.guild.unban(user);
@@ -97,7 +97,6 @@ message.channel.sendEmbed(embed)
   if(!message.member.hasPermission('MANAGE_ROLES')) return message.reply("U don't have enough permissions to **Mute members** :lol:")
   if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("I don't have enough permissions to **Mute members**.")
 
-    let user = message.mentions.users.first();
       let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
       if(!tomute) return message.reply("Idk who 2 **mute** xd.")
       if(tomute.hasPermission("MANAGE_MESSAGES"))return;
@@ -133,7 +132,7 @@ message.channel.sendEmbed(embed)
 
       if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply("U don't have enough permissions to **Unmute members** :lol:")
     
-      let user = message.mentions.users.first();
+
       let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
       if(!toMute) return message.reply("Idk who 2 **unmute** xd.");
     
