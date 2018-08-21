@@ -19,16 +19,14 @@ client.on('message' , message => {
         } else if(messageArray[1]) {
           user = messageArray[1];
         }
-          if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send("`You don't have enough permissions to use this command.`");
-          if(!user) return  message.channel.send(`Do this ${prefix} <@ID user> \n or \n ${prefix}unban ID user`);
+          if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply("U don't have enough permissions to **Unban members** :lol:")
+          if(!user) return;
           message.guild.unban(user);
-          message.guild.owner.send(`لقد تم فك الباند عن الشخص \n ${user} \n By : <@${message.author.id}>`)
           var embed = new Discord.RichEmbed()
-          .setThumbnail(message.author.avatarURl)
-          .setColor("#00ff93")
-          .setDescription('**~~User unbanned :~~**')
-          .addField('- Unbanned User :', `<@${user}>` , true)
-          .addField('- Unbanned By :' ,       ` <@${message.author.id}> ` , true)
+          .setTitle("UNBANNED!")
+          .setColor("RANDOM")
+          .addField('- Unbanned User:', `<@${user}>` , true)
+          .addField('- Unbanned By:' ,       ` <@${message.author.id}> ` , true)
           message.channel.sendEmbed(embed)
 
     }
@@ -62,12 +60,10 @@ if (!message.guild.member(user).bannable) return message.reply("Connot ban this 
 message.guild.member(user).kick(user);
 
 const banembed = new Discord.RichEmbed()
-.setAuthor(`KICKED!`, user.displayAvatarURL)
+.setTitle(`KICKED!`)
 .setColor("RANDOM")
-.setTimestamp()
-.addField("**Kicked User:**",  '**[ ' + `${user.tag}` + ' ]**')
-.addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-.addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+.addField("- Kicked User:",  `<@${user.id}>`, true)
+.addField("- Kicked By:", `<@${message.author.id}>`, true)
 message.channel.send({
 embed : banembed
 })
@@ -89,13 +85,10 @@ if (!message.guild.member(user)
 
 message.guild.member(user).ban(7, user)
 let bbbbbb = new Discord.RichEmbed()
-.setAuthor(`BANNED!`, user.displayAvatarURL)
-.setThumbnail("https://thumbs.gfycat.com/HorribleNegligibleDuiker-size_restricted.gif")
+.setTitle(`BANNED!`)
 .setColor("RANDOM")
-.setTimestamp()
-.addField("**Banned Uesr:**",  '**[ ' + `${user.tag}` + ' ]**')
-.addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-.addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+.addField("- Banned Uesr:",  `<@${user.id}>`, true)
+.addField("- Banned By:", `<@${message.author.id}>`, true)
 message.channel.send({
 embed : bbbbbb
 })
