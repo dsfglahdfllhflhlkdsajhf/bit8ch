@@ -65,7 +65,7 @@ client.on('message', message => {
 
   if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
   if (message.mentions.users.size < 1) return message.reply("Idk who 2 **ban** xd.");
-  if(!reason) return message.reply ("Type a **reason** plz.");
+  if(!reason) return message.reply("Type a **reason** plz.");
   if (!message.guild.member(user)
   .bannable) return message.reply("Connot ban this user.");
 
@@ -225,14 +225,14 @@ client.on('message', async message =>{
 if (message.author.omar) return;
 if (!message.content.startsWith(prefix)) return;
 if(!message.channel.guild) return;
-if(!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send("U don't have enough permissions to **Mute members** :lol:")
-if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.channel.send("I don't have enough permissions to **Mute members**.")
+if(!message.member.hasPermission('MANAGE_ROLES')) return message.reply("U don't have enough permissions to **Mute members** :lol:")
+if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("I don't have enough permissions to **Mute members**.")
 var command = message.content.split(" ")[0];
 command = command.slice(prefix.length);
 var args = message.content.split(" ").slice(1);
 	if(command == "mute") {
     let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if(!tomute) return message.reply("Idk who 2 **mute** xd.") .then(m => m.delete(5000));
+    if(!tomute) return message.reply("Idk who 2 **mute** xd.")
     if(tomute.hasPermission("MANAGE_MESSAGES"))return;
     let muterole = message.guild.roles.find(`name`, "muted");
     //start of create role
@@ -276,7 +276,7 @@ if(command === `unmute`) {
 
 
   let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-  if(!toMute) return message.channel.sendMessage("Idk who 2 **unmute** xd.");
+  if(!toMute) return message.reply("Idk who 2 **unmute** xd.");
 
   let role = message.guild.roles.find (r => r.name === "muted");
   
