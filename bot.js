@@ -11,7 +11,7 @@ const moment = require('moment');
 client.on('ready', async () => {
     console.log('I am ready!');
 
-    client.user.setPresence({ game: { name: 'Alpha', type: 2 } });
+    client.user.setGame("Alpha Codes.", "https://www.twitch.tv/idk");
 });
 
 client.on('message' , message => {
