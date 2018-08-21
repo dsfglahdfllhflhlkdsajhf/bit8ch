@@ -314,128 +314,27 @@ var mentionned = message.mentions.users.first();
 });
 
 
-    client.on('message', message => {
-      var prefix = "#";
-      if(message.content.startsWith(prefix + 'mutevoice')) {
-        if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.sendMessage("**ليس لديك صلاحية لاعطاء ميوت صوتي**:x: ").then(m => m.delete(5000));
-        if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**I Don't Have `MUTE_MEMBERS` Permission**").then(msg => msg.delete(6000))
-         
-      if(message.mentions.users.size === 0) {
-        return message.reply("Please mention a user to mute.");
-      }
-      let muteMember = message.guild.member(message.mentions.users.first());
-      if(!muteMember) {
-        return message.reply("Try again.");
-      }
-      muteMember.setMute(true);
-      if(muteMember) {
-        message.channel.sendMessage("User muted successfully.");
-      }
-    }
-  });
-  client.on('message', message => {
-    var prefix = "#";
-    if(message.content.startsWith(prefix + 'unmutevoice')) {
-      if(!message.member.hasPermission("MUTE_MEMBERS")) return message.channel.sendMessage("**ليس لديك صلاحية لاعطاء ميوت صوتي**:x: ").then(m => m.delete(5000));
-      if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.reply("**I Don't Have `MUTE_MEMBERS` Permission**").then(msg => msg.delete(6000))
-       
-    if(message.mentions.users.size === 0) {
-      return message.reply("Please mention a user to mute.");
-    }
-    let muteMember = message.guild.member(message.mentions.users.first());
-    if(!muteMember) {
-      return message.reply("Try again.");
-    }
-    muteMember.setMute(false);
-    if(muteMember) {
-      message.channel.sendMessage("User muted successfully.");
-    }
-  }
-});
- 
 
-    client.on('message', message => {
-        if(!message.channel.guild) return;
-        var prefix = "#";
-    if(message.content.startsWith(prefix + 'move')) {
-        var cmdrole = message.guild.roles.find("name", config.cmdrole)
-           if (message.member.hasPermission("MOVE_MEMBERS")) {
-if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.reply("**I Don't Have `MOVE_MEMBERS` Permission**").then(msg => msg.delete(6000))
-                  if (message.mentions.users.size === 0) {
-                         return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "move [USER]``")
-                  }
-                  if (message.member.voiceChannel != null) {
-                         if (message.mentions.members.first().voiceChannel != null) {
-                                var authorchannel = message.member.voiceChannelID;
-                                var usermentioned = message.mentions.members.first().id;
-                               var embed = new Discord.RichEmbed()
-                                  .setTitle("Succes!")
-                                  .setColor("#000000")
-                                  .setDescription(`لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك:white_check_mark: `)
-                                var embed = new Discord.RichEmbed()
-                                  .setTitle(`You are Moved in ${message.guild.name}`)
-                                  .setColor("#000000")
-                                  .setDescription(`<@${message.author.id}> moved you to his channel!\nServer => ${message.guild.name}`)
-                                                              message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
-                                message.guild.members.get(usermentioned).send(embed)
-                         } else {
-                                message.channel.send("``لا تستطيع سحب "+ message.mentions.members.first() +" `يجب ان يكون هذه العضو في روم صوتي`")
-                         }
-                  } else {
-                         message.channel.send("``يجب ان تكون في روم صوتي لكي تقوم بسحب العضو أليك``")
-                  }
-           } else {
-                  message.react("❌")
-           }
-        }
-        });
+
 
         client.on('message', message => {
           var prefix = "#";
           if(message.content.startsWith(prefix + 'move all')) {
-           if (!message.member.hasPermission("MOVE_MEMBERS")) return message.channel.send('**لايوجد لديك صلاحية سحب الأعضاء**');
-             if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.reply("**لايوجد لدي صلاحية السحب**");
-          if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
+           if (!message.member.hasPermission("MOVE_MEMBERS")) return message.reply("U can't.");
+             if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.reply("I can't");
+          if (message.member.voiceChannel == null) return message.reply(`I can't find u in any voice channel!`)
            var author = message.member.voiceChannelID;
            var m = message.guild.members.filter(m=>m.voiceChannel)
            message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
            m.setVoiceChannel(author)
            })
-           message.channel.send(`**تم سحب جميع الأعضاء إليك**`)
+           message.channel.send(`Moving the members to your voice channel...`)
           
           
            }
              });
 
-client.on("message", message => {
-    var prefix = "#";
-    const command = message.content.split(" ")[0];
- 
-    if(command == prefix+"voicekick"){
- 
-        if (!message.guild.member(message.author).hasPermission('MOVE_MEMBERS') || !message.guild.member(message.author).hasPermission('ADMINISTRATOR')) {
-            return message.reply('you do not have permission to perform this action!');
-        }
- 
-        var member = message.guild.members.get(message.mentions.users.array()[0].id);
-        if(!message.mentions.users){
-            message.reply("please mention the member")
-            return;
-        }
- 
-    if(!member.voiceChannel){
-    message.reply("i can't include voice channel for member!")
-    return;
-    }
-              message.guild.createChannel('voicekick', 'voice').then(c => {
-                member.setVoiceChannel(c).then(() => {
-                    c.delete(305).catch(console.log)
- message.reply(' has been successfullly kicked from voice.');
-     
-      });
-     });
-    }
-});
+
 
 client.on("message", message => {
     var prefix = "#";
@@ -486,54 +385,6 @@ if(!message.guild.member(client.user).hasPermission("ADMINISTRATOR")) return mes
     } 
 });
 
-    client.on('message', message => {
-      var prefix = "#";
-      if(message.content.startsWith(prefix + 'deafen')) {
-    if (message.mentions.users.size === 0 && message.mentions.roles.size === 0) {
-      return message.reply('**يجب عليك المنشن اولاّ**:x:').catch(console.error);
-    }
-    if (!message.guild.member(client.user).hasPermission('DEAFEN_MEMBERS')) {
-      return message.reply('للأسف البوت لا يمتلك صلاحيات لتنفيذ هذه الأمر**:x:').catch(console.error);
-    }
-   
-    const deafenMember = (member) => {
-      if (!member || !member.voiceChannel) return;
-      if (member.serverDeaf) return message.channel.send(`${member} **لديه ديفن بالفعل**:x:`);
-      member.setDeaf(true).catch(console.error);
-      if(!message.member.hasPermission("DEAFEN_MEMBERS")) return message.channel.sendMessage("**ليس لديك صلاحية لاعطاء ديفن **:x: ").then(m => m.delete(5000));
-    };
-   
-    message.mentions.users.forEach(user => deafenMember(message.guild.member(user)));
-    message.mentions.roles.forEach(role => role.members.forEach(member => deafenMember(member)));
-      }
-      
-  });  
-   
-  client.on('message', async message =>{
-    var prefix = "#";
-    if(message.content.startsWith(prefix + 'undeafen')) {
-   
-  if (message.mentions.users.size === 0 && message.mentions.roles.size === 0) {
-    return message.reply('**يجب عليك المنشن اولاّ**:x:').catch(console.error);
-  }
-  if (!message.guild.member(client.user).hasPermission('DEAFEN_MEMBERS')) {
-    return message.reply('**للأسف البوت لا يمتلك صلاحيات لتنفيذ هذه الأمر**:x: ').catch(console.error);
-    if(!message.member.hasPermission("DEAFEN_MEMBERS")) return message.channel.sendMessage("**ليس لديك صلاحية لاعطاء ديفن **:x: ").then(m => m.delete(5000));
-  }
-   
-  const undeafenMember = (member) => {
-    if (!member || !member.voiceChannel) return;
-    if (!member.serverDeaf) return message.channel.send(`${member} `);
-    member.setDeaf(false).catch(console.error);
-  };
-   
-  message.mentions.users.forEach(user => undeafenMember(message.guild.member(user)));
-  message.mentions.roles.forEach(role => role.members.forEach(member => undeafenMember(member)));
-  }
-  });
-
-
-
 
  
 var prefix= "#";
@@ -543,10 +394,10 @@ client.on("message", message => {
        var nam = args.join(' ');
      
       if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
-      if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return message.reply("**يحتاج البوت الى خاصية` MANAGE_CHANNELS ` **").then(msg => msg.delete(6000))
-      if (!nam) return message.channel.send(`<@${message.author.id}> يجب عليك ادخال اسم`);
+      if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return message.reply("I can't.")
+      if (!nam) return message.channel.send(`<@${message.author.id}>, you should to insert a name.`);
       message.guild.createChannel(nam, 'text') // كل 60 تساوي دقيقة عدل عليها الوقت لي تبيه 
-      message.channel.send(`:white_check_mark:  تم عمل الروم الكتابي : \`${nam}\``);
+      message.channel.send(`**${nam}**Channel, is ready ^^`);
     }
     });
  
@@ -557,26 +408,13 @@ client.on("message", message => {
        var nam = args.join(' ');
      
       if(!message.member.hasPermission('MANAGE_CHANNELS')) return;   
-      if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return message.reply("**يحتاج البوت الى خاصية` MANAGE_CHANNELS ` **").then(msg => msg.delete(6000))
-      if (!nam) return message.channel.send(`<@${message.author.id}> يجب عليك ادخال اسم`);
+      if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return message.reply("I can't")
+      if (!nam) return message.channel.send(`<@${message.author.id}>, you should to insert a name.`);
       message.guild.createChannel(nam, 'voice')
-      message.channel.send(`:white_check_mark:  تم عمل الروم الصوتي : \`${nam}\``);
+      message.channel.send(`**${nam}**Channel, is ready ^^`);
     }
     });
 
-var prefix= "#";
-client.on("message", message => {
-    if(message.content.startsWith(prefix + 'cc')) {
-     let args = message.content.split(" ").slice(1);
-       var nam = args.join(' ');
-     
-      if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
-      if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.reply("**يحتاج البوت الى خاصية` MANAGE_CHANNELS ` **").then(msg => msg.delete(6000))
-      if (!nam) return message.channel.send(`<@${message.author.id}> يجب عليك ادخال اسم`);
-      message.guild.createChannel(nam, 'category') //  
-      message.channel.send(`:white_check_mark:  تم عمل مجموعة : \`${nam}\``);
-    }
-    });
 
     var prefix= "#";
     client.on("message", message => {
@@ -585,23 +423,23 @@ client.on("message", message => {
            var nam = args.join(' ');
          
           if(!message.member.hasPermission('ADMINISTRATOR')) return;
-          if (!nam) return message.channel.send(`<@${message.author.id}> يجب عليك ادخال اسم`).then(msg => msg.delete(10000))
+          if (!nam) return message.channel.send(`<@${message.author.id}>, you should to insert a name.`)
           message.guild.createChannel(nam, 'voice').then(c => setTimeout(() => c.delete(), 120000)) // كل 60 تساوي دقيقة عدل عليها الوقت لي تبيه 
-          message.channel.send(`:ballot_box_with_check: تم عمل الروم الصوتي : \`${nam}\``).then(c => setTimeout(() => c.edit(`<@${message.author.id}> :stopwatch:  انتهى وقت الروم الصوتي`), 120000))  // 120000 دقيقتان
+          message.channel.send(`**${nam}**Channel, is ready ^^`).then(c => setTimeout(() => c.edit(`<@${message.author.id}> :stopwatch:  Voice channel just removed!`), 120000))  // 120000 دقيقتان
         }
         });
 
 client.on('message', message => {
   var prefix = "#";
 if(message.content === prefix + "muteall") {
-             if(!message.channel.guild) return message.reply('** This command only for servers**');
+             if(!message.channel.guild) return;
 
-if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' **__ليس لديك صلاحيات__**');
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('U can\'t');
 message.channel.overwritePermissions(message.guild.id, {
 SEND_MESSAGES: false
 
 }).then(() => {
-    message.reply("**__تم تقفيل الشات__ :white_check_mark: **")
+    message.reply("Chat just closed!")
 
 });
 }
@@ -612,14 +450,14 @@ SEND_MESSAGES: false
   client.on('message', message => {
     var prefix = "#";
 if(message.content === prefix + "unmuteall") {
-          if(!message.channel.guild) return message.reply('** This command only for servers**');
+          if(!message.channel.guild) return;
 
-if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**__ليس لديك صلاحيات__**');
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('U can\'t');
 message.channel.overwritePermissions(message.guild.id, {
 SEND_MESSAGES: true
 
 }).then(() => {
-    message.reply("**__تم فتح الشات__:white_check_mark:**")
+    message.reply("If u instant....")
 });
   }
    
@@ -629,12 +467,12 @@ SEND_MESSAGES: true
 
           client.on("message", (message) => {
             if (message.content.startsWith('#delet')) {
-if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return message.reply("**I Don't Have `MANAGE_CHANNELS` Permission**").then(msg => msg.delete(6000))
-                if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("ليس لديك خاصية `MANAGE_CHANNELS` Premissions ");
+if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return message.reply("I can't").then(msg => msg.delete(6000))
+                if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("U can't");
          
                 let args = message.content.split(' ').slice(1);
                 let channel = message.client.channels.find('name', args.join(' '));
-                if (!channel) return message.reply('**مافي روم بهل اسم -_-**').catch(console.error);
+                if (!channel) return message.reply('I can\'t find this channel.').catch(console.error);
                 channel.delete()
             }
         });
