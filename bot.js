@@ -104,7 +104,7 @@ if(!message.member.hasPermission('MANAGE_ROLES')) return message.reply("U don't 
   let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
   if(!toMute) return message.reply("Idk who 2 **unmute** xd.");
 
-  let role = message.guild.roles.find (r => r.name === "muted");
+  let role = message.guild.roles.find (r => r.name === "AlphaMute");
   
   if(!role || !toMute.roles.has(role.id)) return message.reply(`This user is already unmuted`)
 
