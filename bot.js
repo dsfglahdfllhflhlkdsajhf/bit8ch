@@ -615,7 +615,7 @@ client.on("message", message => {
       if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
       if(!message.member.hasPermission("MANAGE_CHANNELS")) return message.reply("**يحتاج البوت الى خاصية` MANAGE_CHANNELS ` **").then(msg => msg.delete(6000))
       if (!nam) return message.channel.send(`<@${message.author.id}> يجب عليك ادخال اسم`);
-      message.guild.createChannel(nam, {position: 'category'}) //  
+      message.guild.createChannel({type: 'category'}) //  
       message.channel.send(`:white_check_mark:  تم عمل مجموعة : \`${nam}\``);
     }
     });
