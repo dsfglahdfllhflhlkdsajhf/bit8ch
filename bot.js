@@ -128,6 +128,7 @@ embed : bbbbbb
      .setAuthor("MUTED!", user.displayAvatarURL)
       .addField("- Muted User:", `<@${user.id}>`, true)
      .addField("- Muted By:", `<@${message.author.id}>`, true)
+    message.channel.send(emmmmm)
 
     break;
 
