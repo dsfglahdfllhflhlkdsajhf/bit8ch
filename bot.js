@@ -56,7 +56,7 @@ client.on('message' , message => {
             let Tfitler = (reaction, user) => reaction.emoji('🇫');
             let FFilter = (reaction, user) => reaction.emoji('🇦');
 
-            let Fcollect = message.creatReactionCollector{filter: 'Ffilter', time: "12000000000"}
+            let Fcollect = message.creatReactionCollector({filter: 'Ffilter', time: "12000000000"})
 
             Fcollect.on('collect', r =>{
               let embed = new Discord.RichEmbed()
