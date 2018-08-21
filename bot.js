@@ -23,7 +23,7 @@ client.on('message' , message => {
           if(!user) return;
           message.guild.unban(user);
           var embed = new Discord.RichEmbed()
-          .setTitle("UNBANNED!")
+          .setAuthor("UNBANNED!", user.displayAvatarURL)
           .setColor("RANDOM")
           .addField('- Unbanned User:', `<@${user}>` , true)
           .addField('- Unbanned By:' ,       ` <@${message.author.id}> ` , true)
@@ -60,7 +60,7 @@ if (!message.guild.member(user).bannable) return message.reply("Connot ban this 
 message.guild.member(user).kick(user);
 
 const banembed = new Discord.RichEmbed()
-.setTitle(`KICKED!`)
+.setAuthor(`KICKED!`, user.displayAvatarURL)
 .setColor("RANDOM")
 .addField("- Kicked User:",  `<@${user.id}>`, true)
 .addField("- Kicked By:", `<@${message.author.id}>`, true)
@@ -85,7 +85,7 @@ if (!message.guild.member(user)
 
 message.guild.member(user).ban(7, user)
 let bbbbbb = new Discord.RichEmbed()
-.setTitle(`BANNED!`)
+.setAuthor(`BANNED!`, user.displayAvatarURL)
 .setColor("RANDOM")
 .addField("- Banned Uesr:",  `<@${user.id}>`, true)
 .addField("- Banned By:", `<@${message.author.id}>`, true)
