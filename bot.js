@@ -69,11 +69,7 @@ var args = message.content.split(" ").slice(1);
     }
 
     await(tomute.addRole(muterole.id))
-    let shitEmbed = new Discord.RichEmbed()
-    .setAuhtor("MUTED!", user.displayAvatarURL)
-    .addField("- Muted User:", `<@${user.id}>`, true)
-    .addField("- Muted By:", `<@${message.author.id}>`, true)
-    message.channel.sendEmbed(shitEmbed)
+    message.reply(`**${user}** has been muted.`)
 
   //end of module
   }
