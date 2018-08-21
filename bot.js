@@ -124,7 +124,10 @@ embed : bbbbbb
       }
     
       (tomute.addRole(muterole.id));
-      message.reply(`**${user.username}** has been muted.`);
+     let emmmmm = new Discord.RichEmbed()
+     .setAuthor("MUTED!", user.displayAvatarURL)
+      .addField("- Muted User:", `<@${user.id}>`, true)
+     .addField("- Muted By:", `<@${message.author.id}>`, true)
 
     break;
 
