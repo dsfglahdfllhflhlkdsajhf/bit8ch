@@ -283,7 +283,7 @@ if(command === `unmute`) {
   if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("The user is already unmuted!")
 
   await toMute.removeRole(role)
-  message.channel.sendMessage("<@${tomute.id}>, just unmuted.");
+  message.channel.sendMessage(`<@${toMute.id}>, just unmuted.`);
 
   return;
 
