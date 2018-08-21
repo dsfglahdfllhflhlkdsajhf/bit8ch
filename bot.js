@@ -58,10 +58,10 @@ client.on('message' , message => {
 	let filter4 = (reaction, user) => reaction.emoji.name === '🇦' && user.id === message.author.id;
 
 
-	let collector1 = msg.createReactionCollector(filter1, { time: 120000 });
-	let collector2 = msg.createReactionCollector(filter2, { time: 120000 });
-	let collector3 = msg.createReactionCollector(filter3, { time: 120000 });
-	let collector4 = msg.createReactionCollector(filter4, { time: 120000 });
+	let collector1 = message.createReactionCollector(filter1, { time: 120000 });
+	let collector2 = message.createReactionCollector(filter2, { time: 120000 });
+	let collector3 = message.createReactionCollector(filter3, { time: 120000 });
+	let collector4 = message.createReactionCollector(filter4, { time: 120000 });
   
   collector1.on('collect', r => {
 
@@ -70,7 +70,7 @@ client.on('message' , message => {
   		collector3.stop();
   		collector4.stop();
   		embed.setDescription(`No test nibba ._.`);
-  		msg.edit(embed).then(msg.delete(5000));
+  		message.edit(embed)
      });
   });
 
@@ -505,8 +505,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return m
                 let channel = message.client.channels.find('name', args.join(' '));
                 if (!channel) return message.reply('I can\'t find this channel.').catch(console.error);
                 channel.delete()
-            }
-        });
+	    }
 
 
  
