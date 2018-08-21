@@ -231,6 +231,7 @@ var command = message.content.split(" ")[0];
 command = command.slice(prefix.length);
 var args = message.content.split(" ").slice(1);
 	if(command == "mute") {
+  let user = message.mentions.users.first();
     let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!tomute) return message.reply("Idk who 2 **mute** xd.")
     if(tomute.hasPermission("MANAGE_MESSAGES"))return;
@@ -255,7 +256,7 @@ var args = message.content.split(" ").slice(1);
     }
   
     await(tomute.addRole(muterole.id));
-    message.reply(`<@${tomute.id}> has been muted.`);
+    message.reply(`**${user.username}** has been muted.`);
   
   //end of module
   }
@@ -274,7 +275,7 @@ var args = message.content.split(" ").slice(1);
 if(command === `unmute`) {
   if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply("U don't have enough permissions to **Unmute members** :lol:")
 
-
+  let user = message.mentions.users.first();
   let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
   if(!toMute) return message.reply("Idk who 2 **unmute** xd.");
 
@@ -283,7 +284,7 @@ if(command === `unmute`) {
   if(!role || !toMute.roles.has(role.id)) return message.reply(`This user is already unmuted`)
 
   await toMute.removeRole(role)
-  message.reply(`<@${toMute.id}> has been unmuted.`);
+  message.reply(`**${user.username}** has been unmuted.`);
 
   return;
 
