@@ -31,7 +31,7 @@ client.on('message' , message => {
   }
 });
 
-client.on('message', message => {
+    client.on('message', message => {
     if (message.content === prefix + 'help') {
           let embed = new Discord.RichEmbed()
           .setThumbnail(client.displayAvatarURL)
@@ -50,6 +50,19 @@ client.on('message', message => {
             message.react("🇲")
             message.react("🇫")
             message.react("🇦")
+
+            let Ffilter = (reaction, user) => reaction.emoji('🇬');
+            let Sfilter = (reaction, user) => reaction.emoji('🇲');
+            let Tfitler = (reaction, user) => reaction.emoji('🇫');
+            let FFilter = (reaction, user) => reaction.emoji('🇦');
+
+            let Fcollect = message.creatReactionCollector{filter: 'Ffilter', time: "12000000000"}
+
+            Fcollect.on('collect', r =>{
+              let embed = new Discord.RichEmbed()
+              embed.setTitle("Test ^^")
+              message.edit(embed)
+            })
           });
     }
 });
