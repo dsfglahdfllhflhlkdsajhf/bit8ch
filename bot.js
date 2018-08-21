@@ -9,23 +9,28 @@ client.on('ready', Ryu => {
 
 
 
-client.on('message' , najzx => {
+client.on('message' , message => {
     var prefix = "#";
-    let user = najzx.mentions.users.first()|| client.users.get(najzx.content.split(' ')[1])
-    if(najzx.content.startsWith(prefix + 'unban')) {
-        if(!najzx.member.hasPermission('ADMINISTRATOR')) return najzx.channel.send('❌|**\`ADMINISTRATOR\`لا توجد لديك رتبة`**');
-        if(!user) return  najzx.channel.send(`Do this ${prefix} <@ID user> \n or \n ${prefix}unban ID user`);
-        najzx.guild.unban(user);
-        najzx.guild.owner.send(`لقد تم فك الباند عن الشخص \n ${user} \n By : <@${najzx.author.id}>`)
-        var embed = new Discord.RichEmbed()
-        .setThumbnail(najzx.author.avatarURl)
-        .setColor("RANDOM")
-        .setTitle('**Unban** !')
-        .addField('**User Unban :** ', `${user}` , true)
-        .addField('**By :**' ,       ` <@${najzx.author.id}> ` , true)
-        .setAuthor(najzx.guild.name)
-       .setFooter('Requested by '+najzx.author.username, najzx.author.avatarURL)
-        najzx.channel.sendEmbed(embed)
+    if(message.content.startsWith(prefix + 'unban')) {
+        let user;
+        let messageArray = message.content.split(" ");
+        if(message.mentions.users.first()) {
+          user = message.mentions.users.first();
+        } else if(messageArray[1]) {
+          user = messageArray[1];
+        }
+          if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send("`You don't have enough permissions to use this command.`");
+          if(!user) return  message.channel.send(`Do this ${prefix} <@ID user> \n or \n ${prefix}unban ID user`);
+          message.guild.unban(user);
+          message.guild.owner.send(`لقد تم فك الباند عن الشخص \n ${user} \n By : <@${message.author.id}>`)
+          var embed = new Discord.RichEmbed()
+          .setThumbnail(message.author.avatarURl)
+          .setColor("#00ff93")
+          .setDescription('**~~User unbanned :~~**')
+          .addField('- Unbanned User :', `<@${user}>` , true)
+          .addField('- Unbanned By :' ,       ` <@${message.author.id}> ` , true)
+          message.channel.sendEmbed(embed)
+
     }
   });
 
