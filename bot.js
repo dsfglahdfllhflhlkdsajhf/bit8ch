@@ -63,7 +63,7 @@ if(!reason) return message.reply("Type a **reason** plz.");
 if (!message.guild.member(user)
 .bannable) return message.reply("Connot ban this user.");
 
-message.guild.member(user).ban(7, user);
+message.guild.member(user).ban(7, user)
 
 .setAuthor(`BANNED!`, user.displayAvatarURL)
 .setColor("RANDOM")
