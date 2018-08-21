@@ -18,18 +18,16 @@ client.on('message' , message => {
   var prefix = "#";
   let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
   if(message.content.startsWith(prefix + 'unban')) {
-      if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('❌|**\`ADMINISTRATOR\`لا توجد لديك رتبة`**');
-      if(!user) return  message.channel.send(`Do this ${prefix} <@ID user> \n or \n ${prefix}unban ID user`);
+      if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send("U don't have enough permissions to **Unban members** :lol:");
+      if(!user) return  message.channel.send(`Cannot found the id **${message.content.substring(7)}**.`);
       message.guild.unban(user);
-      message.guild.owner.send(`لقد تم فك الباند عن الشخص \n ${user} \n By : <@${message.author.id}>`)
       var embed = new Discord.RichEmbed()
-      .setThumbnail(message.author.avatarURl)
-      .setColor("RANDOM")
-      .setTitle('**●Unban** !')
-      .addField('**●User Unban :** ', `${user}` , true)
-      .addField('**●By :**' ,       ` <@${message.author.id}> ` , true)
-      .setAuthor(message.guild.name)
-      message.channel.sendEmbed(embed)
+  .setAuthor(`UNBANNED!`, user.displayAvatarURL)
+  .setColor("RANDOM")
+  .setTimestamp()
+  .addField("**Uesr:**",  '**[ ' + `${user.tag}` + ' ]**')
+  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
+  message.channel.sendEmbed(embed)
   }
 });
 
@@ -37,31 +35,8 @@ client.on('message', message => {
     if (message.content === prefix + 'help') {
         var sicon = message.author.displayAvatarURL
         var adminHelp = new Discord.RichEmbed()
-        .setTitle("**List of ADMIN Commands..**\n")
+        .setTitle("**The command is under developement**\n")
 	.setColor("#37303d")
-        .addField("- ban", "**To ban A mentioned user**, **__Example: #ban @mention__**")
-        .addField("- unban", "**Unban by id**, **__Example: #unban id__**")
-        .addField("- kick", "**Kick A mentioned user**, **__Example: #kick @mention__**")
-        .addField("- mute", "**Mute A mentioned user**, **__Example: #mute @mention__**")
-        .addField("- unmute", "**Unmute A mentioned user**, **__Example: #unmute @mention__**")
-        .addField("- muteall", "**Close A current text channel**, **__Example: #muteall__**")
-        .addField("- unmuteall", "**Open A current text channel**, **__Example: #unmuteall__**")
-        .addField("- mutevoice", "**Give A mentioned user server mute**, **__Example: #mutevoice @mention__**")
-		.addField("- unmutevoice", "**Unmute A mentioned user**, **__Example: #unmutevoice @mention__**")
-		.addField("- defean", "**Give A mentioned user server defean**, **__Example: #defean @mention__**")
-		.addField("- undefean", "**Undefean A mentioned user**, **__Example: #undefean @mention__**")
-		.addField("- voicekick", "**Kick A mentioned user from the current voice channel**, **__Example: #voicekick @mention__**")
-		.addField("- move", "**Move A mentioned user to ur voice channel**, **__Example: #move @mention__**")
-		.addField("- moveall", "**Move All users to ur voice channel.**")
-		.addField("- clear", "**Clear A current chat**, **__Example: #clear 22__**")
-		.addField("- ct", "**Creat A text channel**, **__Example: #ct chat__**")
-		.addField("- cv", "**Creat A voice channel**, **__Example: #ct Publicvoice__**")
-		.addField("- v", "**Creat A temporary voice channel**, **__Example: #v temporary__**")
-		.addField("- delete", "**Remove A text or voice channel**, **__Example: #delete Publicvoice__**")
-		.addField("- cc", "**Creat A category**, **__Example: #cc AlphaAdmins__**")
-		.addField("- role", "**Give A mentioned user role**, **__Example: #role @mention Admin__**")
-		.addField("- role all", "**Give All server members role**, **__Example: #role all Members__**")
-        .setThumbnail(sicon)
         message.delete().catch(O_o=>{});
         message.channel.send("**Check your DMs...**").then(message =>{message.delete(10000)})
         message.author.sendEmbed(adminHelp)
@@ -79,20 +54,20 @@ client.on('message', message => {
 
   let args = message.content.split(" ").slice(1);
 
-  if (command == "kick") {
-               if(!message.channel.guild) return message.reply('** This command only for servers**');
+  if (command == "ban") {
+               if(!message.channel.guild) return;
          
-  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("**You Don't Have ` KICK_MEMBERS ` Permission**");
-  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("**I Don't Have ` KICK_MEMBERS ` Permission**");
+  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("U don't have enough permissions to **Ban members** :lol:");
+  if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("I don't have enough permissions to **Ban members**.");
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
   /*let b5bzlog = client.channels.find("name", "5bz-log");
 
   if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
-  if (message.mentions.users.size < 1) return message.reply("**منشن شخص**");
-  if(!reason) return message.reply ("**اكتب سبب الطرد**");
+  if (message.mentions.users.size < 1) return message.reply("Idk who 2 **ban** xd.");
+  if(!reason) return message.reply ("Type a **reason** plz.");
   if (!message.guild.member(user)
-  .bannable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالي**");
+  .bannable) return message.reply("Connot ban this user.");
 
   message.guild.member(user).ban(7, user);
 
@@ -100,7 +75,7 @@ client.on('message', message => {
   .setAuthor(`BANNED!`, user.displayAvatarURL)
   .setColor("RANDOM")
   .setTimestamp()
-  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
+  .addField("**Uesr:**",  '**[ ' + `${user.tag}` + ' ]**')
   .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
   .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
   message.channel.send({
@@ -119,25 +94,25 @@ client.on('message', message => {
 
   let args = message.content.split(" ").slice(1);
 
-  if (command == "ban") {
+  if (command == "kick") {
                if(!message.channel.guild) return message.reply('** This command only for servers**');
          
-  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
-  if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
+  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("U don't have enough permissions to **Kick members** :lol:");
+  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("I don't have enough permissions to **Kick members**.");
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
   /*let b5bzlog = client.channels.find("name", "5bz-log");
 
   if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
-  if (message.mentions.users.size < 1) return message.reply("**منشن شخص**");
-  if(!reason) return message.reply ("**اكتب سبب الطرد**");
+  if (message.mentions.users.size < 1) return message.reply("Idk who 2 **kick** xd.");
+  if(!reason) return message.reply ("Type a **reason** plz.");
   if (!message.guild.member(user)
-  .bannable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالي**");
+  .bannable) return message.reply("Connot ban this user.");
 
-  message.guild.member(user).ban(7, user);
+  message.guild.member(user).kick(user);
 
   const banembed = new Discord.RichEmbed()
-  .setAuthor(`BANNED!`, user.displayAvatarURL)
+  .setAuthor(`KICKED!`, user.displayAvatarURL)
   .setColor("RANDOM")
   .setTimestamp()
   .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
@@ -153,18 +128,9 @@ client.on('message', message => {
 
 if(!message.member.hasPermission("ADMINISTRATOR")) {
   if(/(?:https?:\/)?discord(?:app.com\/invite|.gg)/gi.test(message.content)) {
-      message.delete();
-      let inviteEmbed = new Discord.RichEmbed()
+      message.delete().then(message.author.ban(7))
 
-      .setDescription("__**Auto Suppression**__")
-      .addField("> Envoyé par :", `<@${message.author.id}> avec l'ID ${message.author.id}`)
-      .addField("> Suppression dans :", message.channel)
-      .addField(`> Raison :`, `Envoie une invitation discord : ${message.content}`)
-      .setColor(violet);
-
-      let incidentchannel = message.guild.channels.find(`name`, "log");
-      if(!incidentchannel) return message.channel.send(":no_entry: Je n'est pas trouvé le channel 'logs' !");
-      return incidentchannel.send(inviteEmbed);
+      return message.channel.send('<@${message.author.id}>, just **banned** for sharing a servers.');
   }
 }
 });
@@ -258,15 +224,15 @@ client.on('message', async message =>{
   var prefix = "#";
 if (message.author.omar) return;
 if (!message.content.startsWith(prefix)) return;
-if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
-if(!message.member.hasPermission('MANAGE_ROLES'));
-if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return;
+if(!message.channel.guild) return;
+if(!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send("U don't have enough permissions to **Mute members** :lol:")
+if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.channel.send("I don't have enough permissions to **Mute members**.")
 var command = message.content.split(" ")[0];
 command = command.slice(prefix.length);
 var args = message.content.split(" ").slice(1);
 	if(command == "mute") {
     let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if(!tomute) return message.reply("**يجب عليك المنشن اولاّ**:x: ") .then(m => m.delete(5000));
+    if(!tomute) return message.reply("Idk who 2 **mute** xd.") .then(m => m.delete(5000));
     if(tomute.hasPermission("MANAGE_MESSAGES"))return;
     let muterole = message.guild.roles.find(`name`, "muted");
     //start of create role
@@ -287,18 +253,9 @@ var args = message.content.split(" ").slice(1);
         console.log(e.stack);
       }
     }
-    //end of create role
-    let mutetime = args[1];
-    if(!mutetime) return message.reply("**يرجى تحديد وقت الميوت**:x:");
   
     await(tomute.addRole(muterole.id));
-    message.reply(`<@${tomute.id}> تم اعطائه ميوت ومدة الميوت : ${ms(ms(mutetime))}`);
-  
-    setTimeout(function(){
-      tomute.removeRole(muterole.id);
-      message.channel.send(`<@${tomute.id}> **انقضى الوقت وتم فك الميوت عن الشخص**:white_check_mark: `);
-    }, ms(mutetime));
-  
+    message.channel.send(`<@${tomute.id}>, just muted.`);
   
   //end of module
   }
@@ -308,25 +265,25 @@ client.on('message', async message =>{
   var prefix = "#";
 if (message.author.omar) return;
 if (!message.content.startsWith(prefix)) return;
-if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+if(!message.channel.guild) return;
 if(!message.member.hasPermission('MANAGE_ROLES'));
-if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
+if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.channel.send("I don't have enough permissions to **Mute members**.")
 var command = message.content.split(" ")[0];
 command = command.slice(prefix.length);
 var args = message.content.split(" ").slice(1);
 if(command === `unmute`) {
-  if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.sendMessage("**ليس لديك صلاحية لفك عن الشخص ميوت**:x: ").then(msg => msg.delete(6000))
+  if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.sendMessage("U don't have enough permissions to **Unmute members** :lol:")
 
 
   let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-  if(!toMute) return message.channel.sendMessage("**عليك المنشن أولاّ**:x: ");
+  if(!toMute) return message.channel.sendMessage("Idk who 2 **unmute** xd.");
 
   let role = message.guild.roles.find (r => r.name === "muted");
   
-  if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**لم يتم اعطاء هذه شخص ميوت من الأساس**:x:")
+  if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("The user is already unmuted!")
 
   await toMute.removeRole(role)
-  message.channel.sendMessage("**لقد تم فك الميوت عن شخص بنجاح**:white_check_mark:");
+  message.channel.sendMessage("<@${tomute.id}>, just unmuted.");
 
   return;
 
