@@ -37,7 +37,7 @@ client.on('message', message => {
           .setThumbnail(client.displayAvatarURL)
           .setColor("#831af1")
           .setTitle("**List of a general commands...**\n")
-          .addBlankField();
+          .addBlankField()
           .addField("TEST", "TEST")
           .addField("TEST", "TEST")
           .addField("TEST", "TEST")
