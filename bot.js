@@ -44,11 +44,10 @@ client.on('message' , message => {
             setTimeout(() => {
                embed.setTitle('**Collecting admin commands...**\n');
             },2000);
-        });
+                });
+      }
+      });
 
-  });
-}
-});
 
 
 var prefix = "#"
