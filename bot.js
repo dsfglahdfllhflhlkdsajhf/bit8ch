@@ -32,45 +32,20 @@ client.on('message' , message => {
 });
 
     client.on('message', message => {
-    if (message.content === prefix + 'help') {
+    if (message.content === prefix + 'admin-help') {
           let embed = new Discord.RichEmbed()
           .setThumbnail(client.displayAvatarURL)
           .setColor("#831af1")
-          .setTitle("**List of a general commands...**\n")
-          .addBlankField()
-          .addField("TEST", "TEST")
-          .addField("TEST", "TEST")
-          .addField("TEST", "TEST")
-          .addField("TEST", "TEST")
-          .addField("TEST", "TEST")
-          .addField("TEST", "TEST")
-          .setFooter("page 1 of 2")
-          message.channel.sendEmbed(embed).then(message => {
-            message.react("🇬")
-            message.react("🇲")
-            message.react("🇫")
-            message.react("🇦")
+          .setTitle("**Collecting admin commands.**\n")
+          message.channel.sendEmbed(embed).then(embed => {
+            setTimeout(() => {
+               embed.setTitle('**Collecting admin commands..**\n');
+            },1000);
+            setTimeout(() => {
+               embed.setTitle('**Collecting admin commands...**\n');
+            },2000);
+        });
 
-	
-	let filter1 = (reaction, user) => reaction.emoji.name === '🇬' && user.id === message.author.id;
-	let filter2 = (reaction, user) => reaction.emoji.name === '🇲' && user.id === message.author.id;
-	let filter3 = (reaction, user) => reaction.emoji.name === '🇫' && user.id === message.author.id;
-	let filter4 = (reaction, user) => reaction.emoji.name === '🇦' && user.id === message.author.id;
-
-
-	let collector1 = message.createReactionCollector(filter1, { time: 120000 });
-	let collector2 = message.createReactionCollector(filter2, { time: 120000 });
-	let collector3 = message.createReactionCollector(filter3, { time: 120000 });
-	let collector4 = message.createReactionCollector(filter4, { time: 120000 });
-  
-  collector1.on('collect', r => {
-		let embed = new Discord.RichEmbed()
-  		embed.setDescription(`No test nibba ._.`)
-		embed.setFooter("page 2 of 2")
-		
-  		message.edit(embed)
-  
-     });
   });
 }
 });
