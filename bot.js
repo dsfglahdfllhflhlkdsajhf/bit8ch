@@ -19,8 +19,8 @@ client.on('message', message => {
   if (message.channel.type === 'dm') return;
   
   if (!command.startsWith(prefix)) return;
-let user = message.mentions.users.first();
-let reason = message.content.split(" ").slice(2).join(" ");
+  const user = message.mentions.users.first();
+  const reason = message.content.split(" ").slice(2).join(" ");
 
   switch (command.slice(1).toLowerCase()) {
 
