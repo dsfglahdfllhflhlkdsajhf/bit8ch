@@ -98,7 +98,7 @@ message.channel.sendEmbed(eeeeeeeee)
       let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
       if(!tomute) return message.reply("Idk who 2 **mute** xd.")
       if(tomute.hasPermission("MANAGE_MESSAGES"))return;
-      let muterole = message.guild.roles.find(`name`, "muted");
+      let muterole = message.guild.roles.find(`name`, "AlphaMute");
       //start of create role
       if(!muterole){
         try{
