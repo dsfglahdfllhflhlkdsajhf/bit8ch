@@ -65,7 +65,6 @@ if (!message.guild.member(user)
 
 message.guild.member(user).ban(7, user);
 
-const banembed = new Discord.RichEmbed()
 .setAuthor(`BANNED!`, user.displayAvatarURL)
 .setColor("RANDOM")
 .setTimestamp()
