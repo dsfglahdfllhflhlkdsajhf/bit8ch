@@ -38,13 +38,14 @@ const user = message.mentions.users.first();
 if (message.author.omar) return;
 if (!message.content.startsWith(prefix)) return;
 if(!message.channel.guild) return;
-if(!message.member.hasPermission('MANAGE_ROLES')) return message.reply("U don't have enough permissions to **Mute members** :lol:");
 if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return;
 var command = message.content.split(" ")[0];
 if (!command.startsWith(prefix)) return;
 command = command.slice(prefix.length);
 var args = message.content.split(" ").slice(1);
     if(command == "mute") {
+if(!message.member.hasPermission('MANAGE_ROLES')) return message.reply("U don't have enough permissions to **Unmute members** :lol:");
+
     let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!tomute) return message.reply("Idk who 2 **mute** xd.")
     if(tomute.hasPermission("MANAGE_MESSAGES"))return;
@@ -84,7 +85,6 @@ const user = message.mentions.users.first();
 if (message.author.omar) return;
 if (!message.content.startsWith(prefix)) return;
 if(!message.channel.guild) return;
-if(!message.member.hasPermission('MANAGE_ROLES')) return message.reply("U don't have enough permissions to **Mute members** :lol:");
 if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return;
 var command = message.content.split(" ")[0];
 if (!command.startsWith(prefix)) return;
@@ -99,8 +99,7 @@ var command = message.content.split(" ")[0];
 command = command.slice(prefix.length);
 var args = message.content.split(" ").slice(1);
 if(command === `unmute`) {
-  if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply("U don't have enough permissions to **Unmute members** :lol:")
-
+if(!message.member.hasPermission('MANAGE_ROLES')) return message.reply("U don't have enough permissions to **Unmute members** :lol:");
   let user = message.mentions.users.first();
   let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
   if(!toMute) return message.reply("Idk who 2 **unmute** xd.");
