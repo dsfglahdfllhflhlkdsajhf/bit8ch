@@ -71,8 +71,11 @@ client.on('message' , message => {
   		collector4.stop();
   		embed.setDescription(`No test nibba ._.`);
   		message.edit(embed)
+  
      });
   });
+}
+});
 
 
 var prefix = "#"
@@ -506,6 +509,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return m
                 if (!channel) return message.reply('I can\'t find this channel.').catch(console.error);
                 channel.delete()
 	    }
+	  });
 
 
  
