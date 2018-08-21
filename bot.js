@@ -33,13 +33,24 @@ client.on('message' , message => {
 
 client.on('message', message => {
     if (message.content === prefix + 'help') {
-        var sicon = message.author.displayAvatarURL
-        var adminHelp = new Discord.RichEmbed()
-        .setTitle("**The command is under developement**\n")
-	.setColor("#37303d")
-        message.delete().catch(O_o=>{});
-        message.channel.send("**Check your DMs...**").then(message =>{message.delete(10000)})
-        message.author.sendEmbed(adminHelp)
+          let embed = new Discord.RichEmbed()
+          .setThumbnail(client.displayAvatarURL)
+          .setColor("#831af1")
+          .setTitle("**List of a general commands...**\n")
+          .addBlankField();
+          .addField("TEST", "TEST")
+          .addField("TEST", "TEST")
+          .addField("TEST", "TEST")
+          .addField("TEST", "TEST")
+          .addField("TEST", "TEST")
+          .addField("TEST", "TEST")
+          .setFooter("page 1 of 2")
+          message.channel.send(embed).then(message => {
+            message.react(":regional_indicator_g:")
+            message.react(":regional_indicator_m:")
+            message.react(":regional_indicator_f:")
+            message.react(":regional_indicator_a:")
+          });
     }
 });
 
