@@ -54,7 +54,6 @@ embed : banembed
 
 if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("U don't have enough permissions to **Ban members** :lol:");
 if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("I don't have enough permissions to **Ban members**.");
-let reason = message.content.split(" ").slice(2).join(" ");
 /*let b5bzlog = client.channels.find("name", "5bz-log");
 
 if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
