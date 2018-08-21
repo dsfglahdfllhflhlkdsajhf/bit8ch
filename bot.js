@@ -59,7 +59,8 @@ var args = message.content.split(" ").slice(1);
         message.guild.channels.forEach(async (channel, id) => {
           await channel.overwritePermissions(muterole, {
             SEND_MESSAGES: false,
-            ADD_REACTIONS: false
+            ADD_REACTIONS: false,
+            ATTACH_FILES: false
           });
         });
       }catch(e){
