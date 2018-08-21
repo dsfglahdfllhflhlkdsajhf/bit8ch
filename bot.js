@@ -32,6 +32,53 @@ client.on('message' , message => {
     }
   });
 
+client.on('message', async message =>{
+  var prefix = "#";
+const user = message.mentions.users.first();
+if (message.author.omar) return;
+if (!message.content.startsWith(prefix)) return;
+if(!message.channel.guild) return;
+if(!message.member.hasPermission('MANAGE_ROLES')) return message.reply("U don't have enough permissions to **Mute members** :lol:");
+if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return;
+var command = message.content.split(" ")[0];
+command = command.slice(prefix.length);
+var args = message.content.split(" ").slice(1);
+    if(command == "mute") {
+    let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!tomute) return message.reply("Idk who 2 **mute** xd.")
+    if(tomute.hasPermission("MANAGE_MESSAGES"))return;
+    let muterole = message.guild.roles.find(`name`, "AlphaMute");
+    //start of create role
+    if(!muterole){
+      try{
+        muterole = await message.guild.createRole({
+          name: "muted",
+          color: "#000000",
+          permissions:[]
+        })
+        message.guild.channels.forEach(async (channel, id) => {
+          await channel.overwritePermissions(muterole, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false
+          });
+        });
+      }catch(e){
+        console.log(e.stack);
+      }
+    }
+
+    await(tomute.addRole(muterole.id));
+    let shitEmbed = new Discord.RichEmbed()
+    .setAuhtor("MUTED!", user.displayAvatarURL)
+    .addField("- Muted User:", `<@${user.id}>`, true)
+    .addField("- Muted By:", `<@${message.author.id}>`, true)
+
+  //end of module
+  }
+
+});
+
+
 client.on('message', message => {
   
   let messageArray = message.content.split(" ");
@@ -95,42 +142,6 @@ embed : bbbbbb
     break;
 
 
-  case "mute":
-
-  if(!message.member.hasPermission('MANAGE_ROLES')) return message.reply("U don't have enough permissions to **Mute members** :lol:")
-  if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("I don't have enough permissions to **Mute members**.")
-
-      let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-      if(!tomute) return message.reply("Idk who 2 **mute** xd.")
-      if(tomute.hasPermission("MANAGE_MESSAGES"))return;
-      let muterole = message.guild.roles.find(`name`, "AlphaMute");
-      //start of create role
-      if(!muterole){
-        try{
-          muterole = message.guild.createRole({
-            name: "muted",
-            color: "#000000",
-            permissions:[]
-          })
-          message.guild.channels.forEach(async (channel, id) => {
-            channel.overwritePermissions(muterole, {
-              SEND_MESSAGES: false,
-              ADD_REACTIONS: false
-            });
-          });
-        }catch(e){
-          console.log(e.stack);
-        }
-      }
-    
-      (tomute.addRole(muterole.id));
-     let emmmmm = new Discord.RichEmbed()
-     .setAuthor("MUTED!", user.displayAvatarURL)
-      .addField("- Muted User:", `<@${user.id}>`, true)
-     .addField("- Muted By:", `<@${message.author.id}>`, true)
-    message.channel.send(emmmmm)
-
-    break;
 
     case "unmute":
 
