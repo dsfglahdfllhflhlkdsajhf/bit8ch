@@ -68,7 +68,7 @@ var args = message.content.split(" ").slice(1);
       }
     }
 
-    await(tomute.addRole(muterole.id));
+    await(tomute.addRole(muterole.id))
     let shitEmbed = new Discord.RichEmbed()
     .setAuhtor("MUTED!", user.displayAvatarURL)
     .addField("- Muted User:", `<@${user.id}>`, true)
