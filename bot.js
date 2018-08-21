@@ -45,7 +45,7 @@ client.on('message', message => {
           .addField("TEST", "TEST")
           .addField("TEST", "TEST")
           .setFooter("page 1 of 2")
-          message.channel.send(embed).then(message => {
+          message.channel.sendEmbed(embed).then(message => {
             message.react(":regional_indicator_g:")
             message.react(":regional_indicator_m:")
             message.react(":regional_indicator_f:")
