@@ -51,10 +51,10 @@ client.on('message' , message => {
             message.react("🇫")
             message.react("🇦")
 
-            let Ffilter = (reaction, user) => reaction.emoji('🇬');
-            let Sfilter = (reaction, user) => reaction.emoji('🇲');
-            let Tfitler = (reaction, user) => reaction.emoji('🇫');
-            let FFilter = (reaction, user) => reaction.emoji('🇦');
+            let Ffilter = (reaction, user) => reaction.emoji.name('🇬');
+            let Sfilter = (reaction, user) => reaction.emoji.name('🇲');
+            let Tfitler = (reaction, user) => reaction.emoji.name('🇫');
+            let FFilter = (reaction, user) => reaction.emoji.name('🇦');
 
             let Fcollect = message.createReactionCollector(Ffilter, { time: 120000 });
 
