@@ -80,9 +80,8 @@ case "unban":
 if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send("U don't have enough permissions to **Unban members** :lol:");
 message.guild.unban(user);
 let eeeeeeeee = new Discord.RichEmbed()
-.setAuthor(`UNBANNED!`, message.user.displayAvatarURL)
+.setAuthor(`UNBANNED!`, user.displayAvatarURL)
 .setColor("RANDOM")
-.setTimestamp()
 .addField("**Uesr:**",  '**[ ' + `${user.tag}` + ' ]**')
 .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
 message.channel.sendEmbed(eeeeeeeee)
