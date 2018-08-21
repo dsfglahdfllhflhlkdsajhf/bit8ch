@@ -103,13 +103,13 @@ message.channel.sendEmbed(embed)
       //start of create role
       if(!muterole){
         try{
-          muterole = await message.guild.createRole({
+          muterole = message.guild.createRole({
             name: "muted",
             color: "#000000",
             permissions:[]
           })
           message.guild.channels.forEach(async (channel, id) => {
-            await channel.overwritePermissions(muterole, {
+            channel.overwritePermissions(muterole, {
               SEND_MESSAGES: false,
               ADD_REACTIONS: false
             });
@@ -119,7 +119,7 @@ message.channel.sendEmbed(embed)
         }
       }
     
-      await(tomute.addRole(muterole.id));
+      (tomute.addRole(muterole.id));
       message.reply(`**${user.username}** has been muted.`);
 
     break;
