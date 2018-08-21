@@ -255,7 +255,7 @@ var args = message.content.split(" ").slice(1);
     }
   
     await(tomute.addRole(muterole.id));
-    message.reply(`**${message.tomute.username}** has been muted.`);
+    message.reply(`<@${tomute.id}> has been muted.`);
   
   //end of module
   }
@@ -283,7 +283,7 @@ if(command === `unmute`) {
   if(!role || !toMute.roles.has(role.id)) return message.reply(`This user is already unmuted`)
 
   await toMute.removeRole(role)
-  message.reply(`**${message.toMute.username}** has been unmuted.`);
+  message.reply(`<@${toMute.id}> has been unmuted.`);
 
   return;
 
