@@ -78,7 +78,6 @@ embed : bbbbbb
 
 case "unban":
 if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send("U don't have enough permissions to **Unban members** :lol:");
-if(!user) return  message.channel.send(`Cannot found the id **${message.content.substring(7)}**.`);
 message.guild.unban(user);
 var eeeeeeeee = new Discord.RichEmbed()
 .setAuthor(`UNBANNED!`, user.displayAvatarURL)
