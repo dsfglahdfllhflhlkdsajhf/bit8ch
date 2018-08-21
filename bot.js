@@ -73,6 +73,7 @@ var args = message.content.split(" ").slice(1);
     .setAuhtor("MUTED!", user.displayAvatarURL)
     .addField("- Muted User:", `<@${user.id}>`, true)
     .addField("- Muted By:", `<@${message.author.id}>`, true)
+    message.channel.sendEmbed(shitEmbed)
 
   //end of module
   }
