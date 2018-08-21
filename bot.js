@@ -64,7 +64,7 @@ if (!message.guild.member(user)
 .bannable) return message.reply("Connot ban this user.");
 
 message.guild.member(user).ban(7, user)
-
+let bbbbbb = new Discord.RichEmbed()
 .setAuthor(`BANNED!`, user.displayAvatarURL)
 .setColor("RANDOM")
 .setTimestamp()
@@ -72,7 +72,7 @@ message.guild.member(user).ban(7, user)
 .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
 .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
 message.channel.send({
-embed : banembed
+embed : bbbbbb
 })
     break;
 
