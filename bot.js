@@ -54,7 +54,7 @@ var args = message.content.split(" ").slice(1);
       try{
         muterole = await message.guild.createRole({
           name: "AlphaMute",
-          color: "RANDOM",
+          color: "#000000",
           permissions:[]
         })
         message.guild.channels.forEach(async (channel, id) => {
@@ -70,13 +70,53 @@ var args = message.content.split(" ").slice(1);
     }
 
     await(tomute.addRole(muterole.id))
-    message.reply(`**${user}** has been muted.`)
+    message.reply(`**${user.username}** has been muted.`)
 
   //end of module
   }
 
 });
 
+
+client.on('message', async message =>{
+  var prefix = "#";
+const user = message.mentions.users.first();
+if (message.author.omar) return;
+if (!message.content.startsWith(prefix)) return;
+if(!message.channel.guild) return;
+if(!message.member.hasPermission('MANAGE_ROLES')) return message.reply("U don't have enough permissions to **Mute members** :lol:");
+if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return;
+var command = message.content.split(" ")[0];
+if (!command.startsWith(prefix)) return;
+command = command.slice(prefix.length);
+var args = message.content.split(" ").slice(1);
+if (message.author.omar) return;
+if (!message.content.startsWith(prefix)) return;
+if(!message.channel.guild) return;
+if(!message.member.hasPermission('MANAGE_ROLES'));
+if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("I don't have enough permissions to **Mute members**.")
+var command = message.content.split(" ")[0];
+command = command.slice(prefix.length);
+var args = message.content.split(" ").slice(1);
+if(command === `unmute`) {
+  if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply("U don't have enough permissions to **Unmute members** :lol:")
+
+  let user = message.mentions.users.first();
+  let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+  if(!toMute) return message.reply("Idk who 2 **unmute** xd.");
+
+  let role = message.guild.roles.find (r => r.name === "muted");
+  
+  if(!role || !toMute.roles.has(role.id)) return message.reply(`This user is already unmuted`)
+
+  await toMute.removeRole(role)
+  message.reply(`**${user.username}** has been unmuted.`);
+
+  return;
+
+  }
+
+});
 
 client.on('message', message => {
   
