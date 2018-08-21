@@ -80,13 +80,13 @@ case "unban":
 if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send("U don't have enough permissions to **Unban members** :lol:");
 if(!user) return  message.channel.send(`Cannot found the id **${message.content.substring(7)}**.`);
 message.guild.unban(user);
-var embed = new Discord.RichEmbed()
+var eeeeeeeee = new Discord.RichEmbed()
 .setAuthor(`UNBANNED!`, user.displayAvatarURL)
 .setColor("RANDOM")
 .setTimestamp()
 .addField("**Uesr:**",  '**[ ' + `${user.tag}` + ' ]**')
 .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-message.channel.sendEmbed(embed)
+message.channel.sendEmbed(eeeeeeeee)
 
   
   break;
