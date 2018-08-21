@@ -51,21 +51,28 @@ client.on('message' , message => {
             message.react("🇫")
             message.react("🇦")
 
-            let Ffilter = (reaction, user) => reaction.emoji.name('🇬');
-            let Sfilter = (reaction, user) => reaction.emoji.name('🇲');
-            let Tfitler = (reaction, user) => reaction.emoji.name('🇫');
-            let FFilter = (reaction, user) => reaction.emoji.name('🇦');
+	
+	let filter1 = (reaction, user) => reaction.emoji.name === '🇬' && user.id === message.author.id;
+	let filter2 = (reaction, user) => reaction.emoji.name === '🇲' && user.id === message.author.id;
+	let filter3 = (reaction, user) => reaction.emoji.name === '🇫' && user.id === message.author.id;
+	let filter4 = (reaction, user) => reaction.emoji.name === '🇦' && user.id === message.author.id;
 
-            let Fcollect = message.createReactionCollector(Ffilter, { time: 120000 });
 
-            Fcollect.on('collect', r =>{
-              let embed = new Discord.RichEmbed()
-              embed.setTitle("Test ^^")
-              message.edit(embed)
-            })
-          });
-    }
-});
+	let collector1 = msg.createReactionCollector(filter1, { time: 120000 });
+	let collector2 = msg.createReactionCollector(filter2, { time: 120000 });
+	let collector3 = msg.createReactionCollector(filter3, { time: 120000 });
+	let collector4 = msg.createReactionCollector(filter4, { time: 120000 });
+  
+  collector1.on('collect', r => {
+
+  		collector1.stop();
+  		collector2.stop();
+  		collector3.stop();
+  		collector4.stop();
+  		embed.setDescription(`No test nibba ._.`);
+  		msg.edit(embed).then(msg.delete(5000));
+     });
+  });
 
 
 var prefix = "#"
