@@ -66,6 +66,7 @@ if (!message.guild.member(user)
 message.guild.member(user).ban(7, user)
 let bbbbbb = new Discord.RichEmbed()
 .setAuthor(`BANNED!`, user.displayAvatarURL)
+.setThumbnail("https://cdn.discordapp.com/attachments/470401561542131733/481358809776914442/tenor.gif")
 .setColor("RANDOM")
 .setTimestamp()
 .addField("**Banned Uesr:**",  '**[ ' + `${user.tag}` + ' ]**')
@@ -80,7 +81,7 @@ case "unban":
 if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send("U don't have enough permissions to **Unban members** :lol:");
 message.guild.unban(user);
 let eeeeeeeee = new Discord.RichEmbed()
-.setAuthor(`UNBANNED!`, user.displayAvatarURL)
+.setAuthor(`UNBANNED!`)
 .setColor("RANDOM")
 .addField("**Uesr:**",  '**[ ' + `${user.tag}` + ' ]**')
 .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
