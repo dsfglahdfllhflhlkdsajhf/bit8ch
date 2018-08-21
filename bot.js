@@ -83,7 +83,7 @@ message.guild.unban(user);
 let eeeeeeeee = new Discord.RichEmbed()
 .setAuthor(`UNBANNED!`)
 .setColor("RANDOM")
-.addField("**Uesr:**",  '**[ ' + `${user.tag}` + ' ]**')
+.addField("** Uesr:**",  '**[ ' + `${user.tag}` + ' ]**')
 .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
 message.channel.sendEmbed(eeeeeeeee)
 
