@@ -9,6 +9,25 @@ client.on('ready', Ryu => {
 
 
 
+client.on('message' , najzx => {
+    var prefix = "#";
+    let user = najzx.mentions.users.first()|| client.users.get(najzx.content.split(' ')[1])
+    if(najzx.content.startsWith(prefix + 'unban')) {
+        if(!najzx.member.hasPermission('ADMINISTRATOR')) return najzx.channel.send('❌|**\`ADMINISTRATOR\`لا توجد لديك رتبة`**');
+        if(!user) return  najzx.channel.send(`Do this ${prefix} <@ID user> \n or \n ${prefix}unban ID user`);
+        najzx.guild.unban(user);
+        najzx.guild.owner.send(`لقد تم فك الباند عن الشخص \n ${user} \n By : <@${najzx.author.id}>`)
+        var embed = new Discord.RichEmbed()
+        .setThumbnail(najzx.author.avatarURl)
+        .setColor("RANDOM")
+        .setTitle('**Unban** !')
+        .addField('**User Unban :** ', `${user}` , true)
+        .addField('**By :**' ,       ` <@${najzx.author.id}> ` , true)
+        .setAuthor(najzx.guild.name)
+       .setFooter('Requested by '+najzx.author.username, najzx.author.avatarURL)
+        najzx.channel.sendEmbed(embed)
+    }
+  });
 
 client.on('message', message => {
   
@@ -77,22 +96,6 @@ embed : bbbbbb
 })
     break;
 
-case "unban":
-  let userr = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
-  if(message.content.startsWith(prefix + 'unban')) {
-      if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('❌|**\`ADMINISTRATOR\`لا توجد لديك رتبة`**');
-      if(!userr) return  message.channel.send(`Do this ${prefix} <@ID user> \n or \n ${prefix}unban ID user`);
-      message.guild.unban(userr);
-      var embedddd = new Discord.RichEmbed()
-      .setAuthor(userr.displayAvatarURL, "UNBAN")
-      .setColor("RANDOM")
-      .addField('**User Unban :** ', `${userr}` , true)
-      .addField('**By :**' ,       ` <@${message.author.id}> ` , true)
-      .setAuthor(message.guild.name)
-      message.channel.sendEmbed(embedddd)
-
-  
-  break;
 
   case "mute":
 
