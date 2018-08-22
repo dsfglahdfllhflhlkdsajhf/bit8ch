@@ -32,6 +32,23 @@ client.on('message' , message => {
     }
   });
 
+
+client.on('message', message => {
+	let messageArray = message.content.split(" ");
+	let command = messageArray[0];
+	let args = messageArray.slice(1);
+	let prefix = "#";
+	if (command === `${prefix}purge`) {
+		if (args[0] === isNaN) return message.reply("Please Enter a number.");
+
+		if (args[0] > 6000) return message.reply("Thats too much man ._.");
+
+		message.channel.bulkDelete(args[0])
+		
+	}
+});
+
+
 client.on('message', async message =>{
   var prefix = "#";
 const user = message.mentions.users.first();
