@@ -148,7 +148,7 @@ const banembed = new Discord.RichEmbed()
 .setAuthor(`KICKED!`, user.displayAvatarURL)
 .setColor("RANDOM")
 .addField("Kicked User..",  `<@${user.id}>`, true)
-.addField("- Kicked By...", `<@${message.author.id}>`, true)
+.addField("Kicked By...", `<@${message.author.id}>`, true)
 message.channel.send({
 embed : banembed
 })
