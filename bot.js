@@ -25,8 +25,8 @@ client.on('message' , message => {
           var embed = new Discord.RichEmbed()
           .setAuthor("UNBANNED!", user.displayAvatarURL)
           .setColor("RANDOM")
-          .addField('- Unbanned User:', `<@${user}>` , true)
-          .addField('- Unbanned By:' ,       ` <@${message.author.id}> ` , true)
+          .addField('Unbanned User..', `<@${user}>` , true)
+          .addField('Unbanned By...' ,       ` <@${message.author.id}> ` , true)
           message.channel.sendEmbed(embed)
 
     }
@@ -147,8 +147,8 @@ message.guild.member(user).kick(user);
 const banembed = new Discord.RichEmbed()
 .setAuthor(`KICKED!`, user.displayAvatarURL)
 .setColor("RANDOM")
-.addField("- Kicked User:",  `<@${user.id}>`, true)
-.addField("- Kicked By:", `<@${message.author.id}>`, true)
+.addField("Kicked User..",  `<@${user.id}>`, true)
+.addField("- Kicked By...", `<@${message.author.id}>`, true)
 message.channel.send({
 embed : banembed
 })
@@ -172,8 +172,8 @@ message.guild.member(user).ban(7, user)
 let bbbbbb = new Discord.RichEmbed()
 .setAuthor(`BANNED!`, user.displayAvatarURL)
 .setColor("RANDOM")
-.addField("- Banned Uesr:",  `<@${user.id}>`, true)
-.addField("- Banned By:", `<@${message.author.id}>`, true)
+.addField("Banned Uesr..",  `<@${user.id}>`, true)
+.addField("Banned By...", `<@${message.author.id}>`, true)
 message.channel.send({
 embed : bbbbbb
 })
