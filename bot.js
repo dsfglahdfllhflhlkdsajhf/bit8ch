@@ -39,7 +39,7 @@ client.on('message', message => {
 	let args = messageArray.slice(1);
 	let prefix = "#";
 	if (command === `${prefix}purge`) {
-		if (args[0] === isNaN) return message.reply("Please Enter a number.");
+		if (args[0]isNaN) return message.reply("Please Enter a number.");
 
 		if (args[0] > 6000) return message.reply("Thats too much man ._.");
 
