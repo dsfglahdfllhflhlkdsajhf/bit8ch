@@ -39,11 +39,11 @@ client.on('message', message => {
 	let args = messageArray.slice(1);
 	let prefix = "#";
 	if (command === `${prefix}purge`) {
-		if (args[0](isNaN)) return message.reply("Please Enter a number.");
+		if (isNaN(args[0])) return message.reply("Please Enter a number.");
 
-		if (args[0] > 6000) return message.reply("Thats too much man ._.");
+		if (args[0] > 100) return message.reply("Thats too much man ._.");
 
-		message.channel.bulkDelete(args[0])
+		message.channel.bulkDelete(args[0]).then(message => message.channel.send(`Ok, removed ${message.content.split(6)} message. ^^`))
 		
 	}
 });
