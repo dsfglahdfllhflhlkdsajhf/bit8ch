@@ -33,6 +33,29 @@ client.on('message' , message => {
   });
 
 
+client.on('message' , message => {
+    var prefix = "#";
+    if(message.content.startsWith(prefix + 'ban')) {
+        let user;
+        let messageArray = message.content.split(" ");
+        if(message.mentions.users.first()) {
+          user = message.mentions.users.first();
+        } else if(messageArray[1]) {
+          user = messageArray[1];
+        }
+          if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply("U don't have enough permissions to **Unban members** :lol:")
+          if(!user) return;
+          message.guild.ban(7, user);
+          var embed = new Discord.RichEmbed()
+          .setAuthor("BANNED!", user.displayAvatarURL)
+          .setColor("RANDOM")
+          .addField('Banned User..', `<@${user}>` , true)
+          .addField('Banned By...' ,       ` <@${message.author.id}> ` , true)
+          message.channel.sendEmbed(embed)
+
+    }
+  });
+
 client.on('message', message => {
 	let messageArray = message.content.split(" ");
 	let command = messageArray[0];
